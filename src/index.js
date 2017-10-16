@@ -14,4 +14,11 @@ app.get('/', function (req, res) {
     res.end();
 });
 
+app.get('/:url', function (request, response) {
+    var timestamp = request.params.timestamp;
+    response.json(getTimestampJSON(timestamp));
+    response.send('Timestamp: ' + timestamp);
+    app.end();
+});
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
