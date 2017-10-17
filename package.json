@@ -18,7 +18,9 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.4",
-    "express": "^4.15.4"
+    "eslint": "^4.9.0",
+    "express": "^4.15.4",
+    "mongoose": "^4.12.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
