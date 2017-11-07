@@ -1,17 +1,10 @@
 import mongoose from 'mongoose';
 import shorten from './shortener';
+const config = require('../config');
 
 mongoose.Promise = require('bluebird');
-const config = 
-{
-    db : {
-        host: 'localhost',
-        name: 'url_shortener',
-    },
-    webhost: 'http://localhost:3000/',
-};
-
-mongoose.connect(`mongodb://${config.db.host}/${config.db.name}`, { useMongoClient: true });
+const dbURI = `mongodb://${config.db.host}/${config.db.name}`;
+mongoose.connect(dbURI, { useMongoClient: true });
 
 const urlSchema = mongoose.Schema({
     original: {
@@ -34,10 +27,10 @@ function checkForDups(url) {
         });
 }
 
-export default function addUrl(url, req) {
+export default function addUrl(url, res) {
     checkForDups(url).then(shortCode => {
         if (shortCode) {
-            throw new Error(`URL already shortened: ${shortCode}`);
+            res.status(200).send(`URL already shortened: ${shortCode} !!`);
         } else {
             if (url) {
                 const newUrl = shorten(url);
@@ -45,10 +38,14 @@ export default function addUrl(url, req) {
                 newUrlEntry.save().then(insertedDocument => {
                     if(!insertedDocument) {
                         throw new Error('Unknown error');
-                    } else {
-                        console.send(`URL Shortened: ${insertedDocument.shortCode}`);
                     }
-
+                    else {
+                        res.status(200).send(`URL successfully shortened: http://www.example.com/${insertedDocument.shortCode}`);
+                    }
+                    return {
+                        url: insertedDocument.original,
+                        shortCode: insertedDocument.shortCode
+                    };
                 }).catch((err) => {
                     throw new Error(err);
                 });

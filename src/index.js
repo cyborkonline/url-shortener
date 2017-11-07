@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 app.get('/new/:url', (request, response) => {
     const url = request.params.url;
-    addUrl(url, request, response);
+    addUrl(url, response);
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); // eslint-disable-line

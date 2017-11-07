@@ -8,8 +8,8 @@ export default function shorten() {
         while (randomIndex > base) {
             randomIndex = Math.random() * 100;
         }
+        randomIndex = Math.floor(randomIndex);
         encoded.push(alphabet[randomIndex]);
     }
-    
-
+    return encoded.join('');
 }
