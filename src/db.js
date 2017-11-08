@@ -27,7 +27,17 @@ function checkForDups(url) {
         });
 }
 
-export default function addUrl(url, res) {
+export function redirect(shortCode, res) {
+    urlEntry.findOne({ shortCode })
+        .then((doc) => {
+            if (!doc){
+                res.status(200).send('URL not found');
+            } else {
+                res.redirect(`https://www.${doc.original}`);
+            }
+        });
+}
+export function addUrl(url, res) {
     checkForDups(url).then(shortCode => {
         if (shortCode) {
             res.status(200).send(`URL already shortened: ${shortCode} !!`);

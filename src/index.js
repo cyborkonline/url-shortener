@@ -3,7 +3,7 @@
 import express from 'express';
 import cors from 'cors';
 import fs from 'fs';
-import addUrl from './db';
+import { addUrl, redirect } from './db';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,9 +16,15 @@ app.get('/', (req, res) => {
     res.end();
 });
 
-app.get('/new/:url', (request, response) => {
-    const url = request.params.url;
-    addUrl(url, response);
+app.get('/:shortCode', (req, res) => {
+    const shortCode = req.params.shortCode;
+    redirect(shortCode, res);
+});
+
+
+app.get('/new/:url', (req, res) => {
+    const url = req.params.url;
+    addUrl(url, res);
 });
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); // eslint-disable-line
