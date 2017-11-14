@@ -40,7 +40,7 @@ export function redirect(shortCode, res) {
 export function addUrl(url, res) {
   checkForDups(url).then(shortCode => {
     if (shortCode) {
-      res.render('new', { shortCode: shortCode });
+      res.render('new.handlebars', { shortCode: shortCode });
     } else {
       if (url) {
         const newUrl = shorten(url);
@@ -51,7 +51,7 @@ export function addUrl(url, res) {
           }
           else {
             res.shortCode = insertedDocument.shortCode;
-            res.render('new', { shortCode: insertedDocument.shortCode });
+            res.render('new.handlebars', { shortCode: insertedDocument.shortCode });
           }
           return {
             url: insertedDocument.original,

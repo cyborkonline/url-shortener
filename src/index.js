@@ -13,7 +13,6 @@ app.use(cors());
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname,'../src/client'));
 app.engine('handlebars', exphbs({
-  defaultLayout: 'index',
   layoutsDir: path.join(__dirname,'../src/client'),
 }));
 
