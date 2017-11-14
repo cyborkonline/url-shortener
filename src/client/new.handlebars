@@ -13,24 +13,22 @@
 
     <div class="container">
         <div class="jumbotron">
-            <div class="container">
             <h1 class="header">
-                NEW
-                Short code generated {{{shortCode}}}
+                URL shortened
             </h1>
-            <blockquote class="shortcode">
-                Minimal boilerplate for Node JS projects with ES6
-            </blockquote>
-            <h3>Usage</h3>
-            <h5> Build App </h5>
-        </div>
+            <a>
+                <span class='local-url'></span>/{{{shortCode}}}
+            </a>
         </div>
         <h5> Created by <a href='https://cyborkonline.github.io'> David Morais </a></h5>
     </div>
 
 </body>
 <script>
-    var code = window.shortCode;
-    document.querySelector('.shortcode').innerHTML=code;
+    var shortCode = "{{shortCode}}"
+    document.querySelector('.local-url').innerHTML = window.origin;
+    document.querySelector('a').addEventListener('click', () => {
+        window.open(`/${shortCode}`,"_self")
+    })
 </script>
 </html>
