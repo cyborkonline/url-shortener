@@ -1,5 +1,5 @@
-### Minimal ES6 + Node + Express boilerplate
+### Mini URL Shortener 
 
-* Currently serves a sample html file
-* Two commands ``` npm run build ``` and  ``` npm start ```
-* CORS + Express 
+* Built using (https://github.com/cyborkonline/ES6-node-boilerplate "Minimal ES6 + Node + Express boilerplate")
+* Includes front-end/back-end. 
+* `./new/(url)`  returns a shortCode for a valid URL
